@@ -1,0 +1,37 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="admin/admin_layout"
+>
+<head>
+  <meta charset="UTF-8">
+  <title>Список пользователей</title>
+</head>
+<body>
+
+<section layout:fragment="content">
+  <div class="container mt-5">
+
+    <table class="table table-hover table-bordered table-secondary">
+      <thead class="table-light">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Имя</th>
+        <th scope="col">Email</th>
+        <th scope="col">Роль</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="user : ${users}">
+        <td class="align-middle text-center" th:text="${user.getId()}"></td>
+        <td class="align-middle text-center" th:text="${user.getUsername()}"></td>
+        <td class="align-middle text-center" th:text="${user.getEmail()}"></td>
+        <td class="align-middle">
+          <span class="text-center w-25" th:if="${user.getRole() == 'ROLE_USER'}">Пользователь</span>
+          <span class="text-center w-25" th:if="${user.getRole() == 'ROLE_ADMIN'}">Администратор</span>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+</body>
+</html>

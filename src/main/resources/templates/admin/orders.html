@@ -1,0 +1,44 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="admin/admin_layout"
+>
+<head>
+  <meta charset="UTF-8">
+  <title>Список пользователей</title>
+</head>
+<body>
+
+<section layout:fragment="content">
+  <div class="container mt-5">
+
+    <table class="table table-secondary table-hover table-bordered">
+      <thead class="table-light">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">ID пользователя</th>
+        <th scope="col">Кол-во товаров</th>
+        <th scope="col">Итог</th>
+        <th scope="col">Дата заказа</th>
+        <th scope="col">Содержание</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="order : ${orders}">
+        <td class="align-middle text-center" th:text="${order.getId()}"></td>
+        <td class="align-middle text-center" th:text="${order.getUser().getId()}"></td>
+        <td class="align-middle text-center" th:text="${order.getProducts().size()}"></td>
+        <td class="align-middle text-center" th:text="${order.getTotal()} + '₽'"></td>
+        <td class="align-middle text-center" th:text="${order.getDate()}"></td>
+        <td class="align-middle text-center">
+          <ul>
+            <li th:each="product : ${order.getProducts()}">
+              <span th:text="${product.getName()}"></span>
+            </li>
+          </ul>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+</body>
+</html>
